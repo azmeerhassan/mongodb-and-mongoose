@@ -29,14 +29,14 @@ const createAndSavePerson = (done) => {
   })
   azmeer.save((err, data)=>{
     if (err) return console.error(err)
-    done(null, data)  
+    return done(null, data)  
   })
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
   Person.create(arrayOfPeople, (err, createdPeople)=>{
     if (err) return console.error(err)
-    done(null, createdPeople)  
+    return done(null, createdPeople)  
   })
   // done(null /*, data*/);
 };
@@ -44,7 +44,7 @@ const createManyPeople = (arrayOfPeople, done) => {
 const findPeopleByName = (personName, done) => {
   Person.find({name: personName}, (err, foundPeople)=>{
     if (err) return console.error(err)
-    done(null, foundPeople)  
+    return done(null, foundPeople)  
   })
   // done(null /*, data*/);
 };
@@ -52,7 +52,7 @@ const findPeopleByName = (personName, done) => {
 const findOneByFood = (food, done) => {
   Person.findOne({favoriteFoods: food}, (err, foundPerson)=>{
     if (err) return console.error(err)
-    done(null, foundPerson)
+    return done(null, foundPerson)
 
   })
 };
@@ -60,7 +60,7 @@ const findOneByFood = (food, done) => {
 const findPersonById = (personId, done) => {
   Person.findById(personId, (err, foundPerson)=>{
     if (err) return console.error(err)
-    done(null, foundPerson)  
+    return done(null, foundPerson)  
   })
   
 
@@ -75,12 +75,12 @@ const findEditThenSave = (personId, done) => {
     person.favoriteFoods.push(foodToAdd)
     
     person.save((err, updatedPerson)=>{
-      if(err) return done(err)
+      if(err) return console.error(err)
       return done(null, updatedPerson)  
     })
   })
 
-  done(null /*, data*/);
+  
 };
 
 const findAndUpdate = (personName, done) => {
